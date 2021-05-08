@@ -19,24 +19,31 @@ $ pip install git+https://github.com/Prev/remote-run.git
 ### CLI Usage
 
 ```bash
-$ remote-run "ls -al" ubuntu@10.0.0.1
+$ remote-run "ls -al" ubuntu@10.0.0.1:22
 
 # which is equivalent to
-$ remote-run "ls -al" --host "10.0.0.1" --username "ubuntu"
+$ remote-run "ls -al" --host "10.0.0.1" --username "ubuntu" --port 22
 ```
 
 
-### Providing password or port
+### Providing password or ssh key
+
+Using password:
 
 ```bash
-$ remote-run "ls -al" root:1234@10.0.0.1:22
+$ remote-run "ls -al" root:1234@10.0.0.1
 
 # which is equivalent to
 $ remote-run "ls -al" \
     --host "10.0.0.1" \
     --username "root" \
     --password "1234" \
-    --port 22
+```
+
+Using ssh key:
+
+```bash
+$ remote-run "ls -al" root@10.0.0.1 --key-filename 'key.pem'
 ```
 
 ### Using in Python
@@ -65,6 +72,7 @@ The script performs:
 4. Fetch output from the node
 5. Remove docker container and the image
 
+(Docker engine should be installed in the worker node)
 
 ### CLI Usage
 
